@@ -24,7 +24,7 @@ The processed data in `RealData/ag-cleaned_L2.txt` is download from the website 
 
 The files `lib/CenteringByGMM.R`,`lib/CLRTransformation.R`,`lib/DataUS012018.R`,`lib/ImportData.R`, `SelectIndLinCols.R` and `lib/TransformData.R` are used to import and transform the bacteria phyla and BMI data of United State from `RealData/ag-cleaned_L2.txt`. The data we used contains 8404 samples and 58 phyla.
 
-We provide the code `RealDataAnalysis_AGP.R` to estimate the bacteria phyla that have an influence on the BMI.
+We provide the code `RealDataAnalysis_AGP.R` to estimate the bacteria phyla that may have an influence on the BMI.
 
 ## Repository Authors
 
