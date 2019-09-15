@@ -1,6 +1,6 @@
 # Aggregating Knockoffs for False Discovery Rate Control With an Application to Gut Microbiome Data
 
-This repository provides the data and an implementation of the algorithms described in the paper
+This repository provides the data and implementations of the methods described in the paper
 *Aggregating Knockoffs for False Discovery Rate Control With an Application to Gut Microbiome Data* by
 Fang Xie and Johannes Lederer.
 
