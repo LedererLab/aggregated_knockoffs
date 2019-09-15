@@ -13,43 +13,43 @@
 # Outputs:
 #    a plot
 
-myPlot.kcurves <- function(y, xlab = "k", ylab = "FDR", main = main, legend.x = 0, legend.y = 0.8,
-                           legendnames = NULL, pch = NULL, col = NULL, ablines = NULL){
-  if(is.null(legendnames)){
-    stop("legendnames should be a character vector with the length of nrow(y)")
-  }
-  if(is.null(ablines)){
-    stop("ablines should be the target FDR vector with the length of nrow(y)")
-  }
-  nrows.y <- nrow(y)
-  ncols.y <- ncol(y)
-  if(is.null(pch)){
-    pch <- c(1 : nrows.y)
-  }
-  if(is.null(col)){
-    col <- c(1 : nrows.y)
-  }
-  plot(NULL, NULL, xlim = c(0, ncol(y) + 0.5), cex.main = 1.2, main = main, cex = 0.5, 
-       xlab = xlab, ylab = ylab, cex.axis = .80, type = "b", ylim = c(0, max(1, max(y))), las = 1)
-  for (j in 1 : nrows.y) {
-    lines(x = 1 : ncols.y, y = y[j, ], type = "b", lty = 1, pch = pch[j], col = col[j])
-  }
-  if(ylab == "FDR"){
-    legend(legend.x, legend.y, legend = legendnames, xjust = 1, yjust = 1,
-           cex = 0.5, lty = rep(1, nrows.y), pch = pch, col = col)
-    for (j in 1 : nrows.y) {
-      abline(h = ablines[j], lty = 2)
-    }
-  }
-  if(ylab == "Power"){
-    legend(legend.x, legend.y, legend = legendnames, xjust = 1, yjust = 0, 
-           cex = 0.5, lty = rep(1, nrows.y), pch = pch, col = col)
-  }
-  if(ylab == "selection accuracy"){
-    legend(legend.x, legend.y, legend = legendnames, xjust = 1, yjust = 1, 
-           cex = 0.5, lty = rep(1, nrows.y), pch = pch, col = col)
-  }
-}
+# myPlot.kcurves <- function(y, xlab = "k", ylab = "FDR", main = main, legend.x = 0, legend.y = 0.8,
+#                            legendnames = NULL, pch = NULL, col = NULL, ablines = NULL){
+#   if(is.null(legendnames)){
+#     stop("legendnames should be a character vector with the length of nrow(y)")
+#   }
+#   if(is.null(ablines)){
+#     stop("ablines should be the target FDR vector with the length of nrow(y)")
+#   }
+#   nrows.y <- nrow(y)
+#   ncols.y <- ncol(y)
+#   if(is.null(pch)){
+#     pch <- c(1 : nrows.y)
+#   }
+#   if(is.null(col)){
+#     col <- c(1 : nrows.y)
+#   }
+#   plot(NULL, NULL, xlim = c(0, ncol(y) + 0.5), cex.main = 1.2, main = main, cex = 0.5, 
+#        xlab = xlab, ylab = ylab, cex.axis = .80, type = "b", ylim = c(0, max(1, max(y))), las = 1)
+#   for (j in 1 : nrows.y) {
+#     lines(x = 1 : ncols.y, y = y[j, ], type = "b", lty = 1, pch = pch[j], col = col[j])
+#   }
+#   if(ylab == "FDR"){
+#     legend(legend.x, legend.y, legend = legendnames, xjust = 1, yjust = 1,
+#            cex = 0.5, lty = rep(1, nrows.y), pch = pch, col = col)
+#     for (j in 1 : nrows.y) {
+#       abline(h = ablines[j], lty = 2)
+#     }
+#   }
+#   if(ylab == "Power"){
+#     legend(legend.x, legend.y, legend = legendnames, xjust = 1, yjust = 0, 
+#            cex = 0.5, lty = rep(1, nrows.y), pch = pch, col = col)
+#   }
+#   if(ylab == "selection accuracy"){
+#     legend(legend.x, legend.y, legend = legendnames, xjust = 1, yjust = 1, 
+#            cex = 0.5, lty = rep(1, nrows.y), pch = pch, col = col)
+#   }
+# }
 
 #----------------------------------------------------------------
 # A plot function: display the relationship between x and y
