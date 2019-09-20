@@ -14,7 +14,7 @@ The file `lib/SCAD_max_lambda.R` contains two functions `SCAD_max_lambda` and `s
 
 The file `lib/Sigma.R` contains a function `Sig` to generate the covariance matrix of design matrix.
 
-The file `lib/myPlot.R` contains two functions `myPlot.FP` and `myPlot.x.Target` to display the relationships between target FDR and selection accuarcy, and between target FDR and actual FDR.
+The file `lib/myPlot.R` contains two functions `myPlot.SA` and `myPlot.FDR` to display the relationships between target FDR and selection accuarcy, and between target FDR and actual FDR.
 
 ## Simulation
 We provide the file `SCAD_Lasso.R` for comparing the FDR and selection accuracy of `KO` and `KO+` with those of `AKO` and `AKO+` respectively in the cases of lasso and scad.
@@ -22,7 +22,7 @@ We provide the file `SCAD_Lasso.R` for comparing the FDR and selection accuracy 
 ## Real Data Analysis
 The processed data in `RealData/ag-cleaned_L2.txt` is download from the website of American Gut Project (http://americangut.org).
 
-The files `lib/CenteringByGMM.R`,`lib/CLRTransformation.R`,`lib/DataUS012018.R`,`lib/ImportData.R`, `SelectIndLinCols.R` and `lib/TransformData.R` are used to import and transform the bacteria phyla and BMI data of United State from `RealData/ag-cleaned_L2.txt`. The data we used contains 8404 samples and 58 phyla.
+The files `lib/DataUS012018.R`,`lib/ImportData.R`, `SelectIndLinCols.R` and `lib/TransformData.R` are used to import and transform the bacteria phyla and BMI data of United State from `RealData/ag-cleaned_L2.txt`. The data we used contains 8404 samples and 56 phyla.
 
 We provide the code `RealDataAnalysis_AGP.R` to estimate the bacteria phyla that may have an influence on the BMI.
 
@@ -33,8 +33,7 @@ We provide the code `RealDataAnalysis_AGP.R` to estimate the bacteria phyla that
 
 
 ## Acknowledgements
-
-The raw AGP data was downloaded from http://americangut.org. 
+The two files `lib/ImportData.R` and `lib/TransformData.R` are written by Lun Li and Johannes Lederer.
 
 ## Reference
 
