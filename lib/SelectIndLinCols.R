@@ -1,3 +1,4 @@
+# Code written by: Fang Xie and Johannes Lederer
 # select only independently linear columns of a matrix
 selindlinearcols <- function(mat){
   ColNames <- colnames(mat)

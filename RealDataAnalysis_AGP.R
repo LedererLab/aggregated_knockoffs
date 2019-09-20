@@ -6,8 +6,6 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 # load sources
 source("lib/ImportData.R")
 source("lib/TransformData.R")
-source("lib/CLRTransformation.R")
-source("lib/CenteringByGMM.R")
 source("lib/SelectIndLinCols.R")
 source("lib/AggregatedKnockoffs.R")
 source("lib/SCAD_max_lambda.R")
