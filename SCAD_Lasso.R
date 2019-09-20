@@ -1,7 +1,7 @@
 # simulation examples for displaying the relationship between FDR and TargetFDR, selection accuracy and TargetFDR
 rm(list=ls())
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-source("lib/AKO.R")
+source("lib/AggregatedKnockoffs.R")
 source("lib/myPlot.R")
 source("lib/Sigma.R")
 source("lib/SCAD_max_lambda.R")
@@ -42,7 +42,7 @@ Sigma <- (t(X) %*% X) / n
 ksteps = 5
 kc = 5
 numFDR = 100
-fdr = seq(0.001, 1, length.out = 1000) / (1 - 1 / 2^kc)
+fdr = seq(0.001, 1, length.out = 100) / (1 - 1 / 2^kc)
 
 
 tic()
@@ -177,6 +177,8 @@ SA.SCAD.2s.p <- - FDR.SCAD.2s.p + Pwr.SCAD.2s.p
 #--------------------------------------------------------------------#
 #---plot the curves of FDR and selection accuracy w.r.t Target FDR---#
 #--------------------------------------------------------------------#
+#----Lasso----#
+#-------------#
 # define file names and legend names
 filename1 = "Results/Lasso-SA-n=200-p=100-snr=5.pdf"  
 filename2 = "Results/Lasso-FDR-n=200-p=100-snr=5.pdf"     
@@ -192,15 +194,13 @@ SA <- cbind(SA.Lasso, SA.Lasso.2s)
 
 # display the relationship between selection accuracy and TargetFDR 
 pdf(file = filename1, width = 5, height = 5)
-mat.fdr <- matrix(fdr * (1 - 1 / 2^kc), length(fdr), ncol(FDR))
-myPlot.FP(x = mat.fdr, SA, main = "lasso", xlab = "Target FDR", ylab = "selection accuracy",
-          legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames)
+myPlot.SA(x = fdr * (1 - 1 / 2^kc), y = SA, main = "lasso", legendnames = legendnames)
 dev.off()
+
 
 # display the relationship between FDR and TargetFDR
 pdf(file = filename2, width = 5, height = 5)
-myPlot.x.Target(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "lasso", 
-                legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames)
+myPlot.FDR(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "lasso",legendnames = legendnames)
 dev.off()
 
 #----------Lasso-knockoff+-----------#
@@ -210,19 +210,17 @@ SA <- cbind(SA.Lasso.p, SA.Lasso.2s.p)
 
 # display the relationship between selection accuracy and TargetFDR 
 pdf(file = filename3, width = 5, height = 5)
-mat.fdr <- matrix(fdr * (1 - 1 / 2^kc), length(fdr), ncol(FDR))
-myPlot.FP(x = mat.fdr, SA, main = "lasso+", xlab = "Target FDR", ylab = "selection accuracy",
-          legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames.p)
+myPlot.SA(x = fdr * (1 - 1 / 2^kc), y = SA, main = "lasso+",legendnames = legendnames.p)
 dev.off()
 
 # display the relationship between FDR and TargetFDR
 pdf(file = filename4, width = 5, height = 5)
-myPlot.x.Target(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "lasso+",
-                legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames.p)
+myPlot.FDR(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "lasso+", legendnames = legendnames.p)
 dev.off()
 
-#-------------------------------------#
-#-------------------------------------#
+#------------#
+#----SCAD----#
+#------------#
 # define file names and legend names
 filename1 = "Results/SCAD-SA-n=200-p=100-snr=5.pdf"  
 filename2 = "Results/SCAD-FDR-n=200-p=100-snr=5.pdf"       
@@ -238,16 +236,12 @@ SA <- cbind(SA.SCAD, SA.SCAD.2s)     # SA: selection accuracy
 
 # display the relationship between selection accuracy and TargetFDR 
 pdf(file = filename1, width = 5, height = 5)
-mat.fdr <- matrix(fdr * (1 - 1 / 2^kc), length(fdr), ncol(FDR))
-myPlot.FP(x = mat.fdr, SA, main = "scad", xlab = "Target FDR", 
-          ylab = "selection accuracy", legend.x = - 0.05, legend.y = 1.05, 
-          legendnames = legendnames)
+myPlot.SA(x = fdr * (1 - 1 / 2^kc), y = SA, main = "scad", legendnames = legendnames)
 dev.off()
 
 # display the relationship between FDR and TargetFDR
 pdf(file = filename2, width = 5, height = 5)
-myPlot.x.Target(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "scad",
-                legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames)
+myPlot.FDR(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "scad", legendnames = legendnames)
 dev.off()
 
 #-------------SCAD-knockoff+-------------#
@@ -257,15 +251,12 @@ SA <- cbind(SA.SCAD.p, SA.SCAD.2s.p)
 
 # display the relationship between selection accuracy and TargetFDR 
 pdf(file = filename3, width = 5, height = 5)
-mat.fdr <- matrix(fdr * (1 - 1 / 2^kc), length(fdr), ncol(FDR))
-myPlot.FP(x = mat.fdr, SA, main = "scad+", xlab = "Target FDR", ylab = "selection accuracy",
-          legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames.p)
+myPlot.SA(x = fdr * (1 - 1 / 2^kc), y = SA, main = "scad+", legendnames = legendnames.p)
 dev.off()
 
 # display the relationship between FDR and TargetFDR
 pdf(file = filename4, width = 5, height = 5)
-myPlot.x.Target(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "scad+", 
-                legend.x = - 0.05, legend.y = 1.05, legendnames = legendnames.p)
+myPlot.FDR(x = fdr * (1 - 1 / 2^kc), y = FDR, main = "scad+", legendnames = legendnames.p)
 dev.off()
 
 
