@@ -52,6 +52,7 @@ as.AKO.SCAD <- matrix(0, p, length(fdr)) # AKO: aggregated FDR control
 
 # methods
 tic()
+
 #----------Lasso-----------
 W <- matrix(0, p, ksteps)
 set.seed(999)
@@ -60,6 +61,7 @@ for (w in 1 : ksteps) {
   stat <- stat.Lasso_lambdasmax(X, Xk, Y)
   W[ , w] <- stat$W
 }
+
 v <- 1                    # counter for length(fdr)
 for(j in fdr){
   t <- knockoff.threshold(W = W[ , 1], fdr = j * (1 - 1 / 2^kc), offset = 0)
@@ -68,6 +70,7 @@ for(j in fdr){
   as.AKO.la[ , v] <- AKO(W = W, ksteps = ksteps, fdr = j, offset = 0, r = 0)
   v <- v + 1
 }
+
 #----------SCAD-----------
 W <- matrix(0, p, ksteps)
 set.seed(999)
@@ -76,6 +79,7 @@ for (w in 1 : ksteps) {
   stat <- stat.SCAD_lambdasmax(X, Xk, Y)
   W[ , w] <- stat$W
 }
+
 v <- 1                    # counter for length(fdr)
 for(j in fdr){
   t <- knockoff.threshold(W = W[ , 1], fdr = j * (1 - 1 / 2^kc), offset = 0)
@@ -84,6 +88,7 @@ for(j in fdr){
   as.AKO.SCAD[ , v] <- AKO(W = W, ksteps = ksteps, fdr = j, offset = 0, r = 0)
   v <- v + 1
 }
+
 toc()
 
 #---display the results---#
