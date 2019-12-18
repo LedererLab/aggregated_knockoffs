@@ -15,6 +15,8 @@ AKO <- function(W, ksteps = 5, fdr = 0.2, offset = 0, r = 1){
     stop("ksteps should be larger than 1 for AKO")
   }
   hatS.all <- matrix(0, p, ksteps)
+  # calculate fdr
+  fdr = fdr / (1 - 1 / 2^ksteps)
   for(i in 1 : ksteps){
     # Threshold
     t <- knockoff.threshold(W[ , i], fdr = fdr / (2^i), offset = offset)
@@ -25,11 +27,40 @@ AKO <- function(W, ksteps = 5, fdr = 0.2, offset = 0, r = 1){
   S <- hatS.all
   
   # Step 2: aggregate the k estimated active sets by taking the union
-  if(length(which(S != 0 & S != 1)) >0){
-    stop("S is a matrix taking value only 0 and 1 in which 1 indicates the position of nonzero component.")
+  hatS <- rep(0, p)
+  if(ksteps == 1){
+    N <- S
+  }else{
+    N <- apply(S, 1, sum)
   }
-  ksteps <- ncol(S)
-  hatS <- rep(0, nrow(S))
+  if(r != 0){
+    hatS[which(N >= ksteps * r)] <- 1 # criteria----partial Union sets
+  }else{
+    hatS[which(N > 0)] <- 1 # criteria----full Union sets
+  }
+  return(hatS)
+}
+
+
+# A modified AKO function: in each step replace fdr/2^i by fdr/2^(i-1)
+AKO.m <- function(W, ksteps = 5, fdr = 0.2, offset = 0, r = 1){
+  # Step 1: using ksteps times standard knockoff with corresponding FDRs
+  p <- nrow(W)
+  if(ksteps <= 1){
+    stop("ksteps should be larger than 1 for AKO")
+  }
+  hatS.all <- matrix(0, p, ksteps)
+  for(i in 1 : ksteps){
+    # Threshold
+    t <- knockoff.threshold(W[ , i], fdr = fdr / (2^(i-1)), offset = offset)
+    # active set 
+    as <- which(W[ , i] >= t)
+    hatS.all[as, i] <- 1
+  }
+  S <- hatS.all
+  
+  # Step 2: aggregate the k estimated active sets by taking the union
+  hatS <- rep(0, p)
   if(ksteps == 1){
     N <- S
   }else{

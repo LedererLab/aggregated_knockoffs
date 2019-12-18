@@ -1,2 +1,9 @@
-.Rhistory
+*.Rhistory
+*.RData
 /backup
+/Results/lassoSCAD_old
+/Results/linearModifiedAKO
+/Results/logComposData_linear
+/Results/logComposData_logistic
+/Results/logComposData_ModifiedAKO
+/Results/logisticModifiedAKO
