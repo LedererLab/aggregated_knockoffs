@@ -1,15 +1,18 @@
+#! R 
+# Filename: DataUS012018.R
+
 # Import Phylum level data before January 2018
 phylum.raw <- ImportData("RealData/ag-cleaned_L2.txt", threshold = 0, replace.zero = T, 
                          all.data = F)
 phylum.raw <- as.matrix(phylum.raw)
 
-#---------------------------------------------------------------------
+#--------------------------
 #--"COUNTRY_OF_BIRTH"--US
 indx.cob <- which(colnames(phylum.raw) == "COUNTRY_OF_BIRTH")
 sam.US <- which(phylum.raw[ , indx.cob] == "United States")
 length(sam.US)
 
-#------------Study on US samples---------------
+#---Study on US samples---
 phylum.US <- phylum.raw[sam.US, -indx.cob]
 
 #--"BMI"--#

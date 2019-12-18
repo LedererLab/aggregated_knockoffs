@@ -1,9 +1,9 @@
 #! R 
 # Filename: plotlasso.R
 
-#--------------------------------------------------------------------#
+#-------------------------------------------------------#
 #---plot the curves of FDR and Power w.r.t Target FDR---#
-#--------------------------------------------------------------------#
+#-------------------------------------------------------#
 #----Lasso----#
 #-------------#
 # define file names and legend names
@@ -20,11 +20,11 @@ legendnames = c("KO", "AKO")
 
 # display the relationship between FDR and TargetFDR
 pdf(file = filename1, width = 5, height = 5)
-myPlot.FDR(x = fdr, y = FDR1, main = "lasso",legendnames = legendnames)
+myPlot(x = fdr, y = FDR1, main = "lasso", ylab = "Actual FDR", legendnames = legendnames)
 dev.off()
-
+# display the relationship between Power and TargetFDR 
 pdf(file = filename2, width = 5, height = 5)
-myPlot.Power(x = fdr, y = Pwr1, main = "lasso", legendnames = legendnames)
+myPlot(x = fdr, y = Pwr1, main = "lasso", ylab = "Power", legendnames = legendnames)
 dev.off()
 
 
@@ -36,11 +36,11 @@ legendnames.m = c("KO", "modified AKO")
 
 # display the relationship between FDR and TargetFDR
 pdf(file = filename3, width = 5, height = 5)
-myPlot.FDR(x = fdr, y = FDR2, main = "lasso", legendnames = legendnames.m)
+myPlot(x = fdr, y = FDR2, main = "lasso", ylab = "Actual FDR", legendnames = legendnames.m)
 dev.off()
 
 # display the relationship between Power and TargetFDR 
 pdf(file = filename4, width = 5, height = 5)
-myPlot.Power(x = fdr, y = Pwr2, main = "lasso", legendnames = legendnames.m)
+myPlot(x = fdr, y = Pwr2, main = "lasso", ylab = "Power", legendnames = legendnames.m)
 dev.off()
 

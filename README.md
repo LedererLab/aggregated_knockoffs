@@ -7,9 +7,10 @@ Fang Xie and Johannes Lederer.
 ## Usage
 
 The file `lib/AggregatedKnockoffs.R` contains the functions `AKO` and `AKO.m` to implement the `AKO` and `modified AKO` methods described in the  paper.
- 
-The file `lib/stat.R` contains the functions `stat.ToDoFDRCon`, which is to compute the test statistic W described in the paper. The argument `stat.type` in the function `stat.ToDoFDRCon` gives four choices `max_lambda_lasso`, `max_lambda_scad`, `max_lambda_logistic` and `estimator_logistic`, which stand for four different test statistics.
 
+The file `lib/dataGen.R` is to generate the synthetic data for the simulations. It contains the linear Guassian data and the logistic regression data.
+
+The file `lib/stat.R` contains the functions `stat.ToDoFDRCon`, which is to compute the test statistic W described in the paper. The argument `stat.type` in the function `stat.ToDoFDRCon` gives four choices `max_lambda_lasso`, `max_lambda_scad`, `max_lambda_logistic` and `estimator_logistic`, which stand for four different test statistics.
 
 The file `lib/myPlot.R` contains the function `myPlot` to display the relationships between target FDR and actual FDR and between target FDR and power.
 
@@ -30,7 +31,7 @@ We provide the code `AGPAnalysis.R` to estimate the bacteria phyla that may have
 
 
 ## Acknowledgements
-The two files `lib/ImportData.R` and `lib/TransformData.R` are written by Lun Li and Johannes Lederer.
+The file `lib/ImportData.R` refers to the codes of Lun Li and Johannes Lederer.
 
 ## Reference
 

@@ -1,3 +1,6 @@
+#! R
+# Filename: AggregatedKnockoffs.R
+
 #---AKO: aggregation knockoffs---#
 # Args:
 #    W: a matrix
@@ -42,7 +45,16 @@ AKO <- function(W, ksteps = 5, fdr = 0.2, offset = 0, r = 1){
 }
 
 
-# A modified AKO function: in each step replace fdr/2^i by fdr/2^(i-1)
+#---A modified AKO function: in the first step replace fdr/2^i by fdr/2^(i-1)---#
+# Args:
+#    W: a matrix
+#    ksteps: a number larger than 1
+#    fdr: a value between 0 and 1
+#    offset：0 or 1. 0：knockoff; 1: knockoff+
+#    r：a value in [0, 1). r = 0 if taking union; r in (0,1) if taking fraction
+#
+# Return: p-dimensional vector whose elements take value 0 or 1
+
 AKO.m <- function(W, ksteps = 5, fdr = 0.2, offset = 0, r = 1){
   # Step 1: using ksteps times standard knockoff with corresponding FDRs
   p <- nrow(W)

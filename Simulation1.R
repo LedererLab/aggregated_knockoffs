@@ -106,9 +106,7 @@ SA.AKO.m <- - FDR.AKO.m + pwr.AKO.m
 source("lib/myPlot.R")
 
 source("lib/plotlasso.R")
-# source("lib/plotlasso_ALL.R")
 # source("lib/plotlogistic.R")
-# source("lib/plotlogistic_ALL.R")
 
 
 

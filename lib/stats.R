@@ -114,7 +114,6 @@ stat.ToDoFDRCon <- function (X, Xk, y, stat.type = "max_lambda_lasso") {
     W = pmax(Z[orig], Z[orig + p]) * sign(Z[orig] - Z[orig + p])
   }else if(stat.type == "estimator_logistic"){
     Z = logReg_est(cbind(X.swap, Xk.swap), y)
-    # W = abs(Z[orig]) - abs(Z[orig + p])
     W = pmax(abs(Z[orig]), abs(Z[orig + p])) * sign(abs(Z[orig]) - abs(Z[orig + p]))
   }else if(stat.type == "max_lambda_logistic"){
     Z = logReg_max_lambda(cbind(X.swap, Xk.swap), y)
