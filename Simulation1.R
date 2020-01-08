@@ -1,6 +1,7 @@
 #! R
 # Filename: Simulation1.R
-# File discription: 
+# File discription: This file is to display the results of aggregation knockoffs 
+#                   in the linear regression case. 
 
 rm(list=ls())
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
@@ -16,13 +17,13 @@ library(knockoff)
 
 # generating data
 # initial parameters
-n <- 200 # sample size
-p <- 100 # number of variables
+n <- 400 # sample size
+p <- 200 # number of variables
 s <- 20 # number of nonzero variables
 sigma <- 1 # standard deviation of noise
 rho <- 0.2 # correlation parameter in Sigma
 snr <- 5 # signal to noise ratio
-   
+ 
 # number for Aggregation Knockoffs
 ksteps = 5
 # repeating number to get the average of FDR
@@ -30,19 +31,13 @@ numRep = 100
 # fdr sequence
 fdr = seq(0.001, 1, length.out = 100)
 
+
 #---generate linear Gaussian data---#
 Data = linGauData(n, p, s, sigma, rho, snr)
 X = Data$X
 y = Data$y
 beta0 = Data$beta0
 
-#---generate logistic regression data---#
-# Data = logRegData(n, p, s, sigma, rho, snr)
-# X = Data$X
-# y = Data$y
-# beta0 = Data$beta0
-
-plot(X%*%beta0, y)
 
 # calculate mu and Sigma based on X
 mu <- colMeans(X)
@@ -52,13 +47,12 @@ Sigma <- cov(X)
 # matries to collect the results
 a <- matrix(0, length(fdr), numRep)
 pwr <- FDP <- a # KO
-pwr.AKO <- FDP.AKO <- a # AKO
 pwr.AKO.m <- FDP.AKO.m <- a # modified AKO
+
 
 #--repeation start--#
 tic()
 for(i in 1 : numRep){
-  #----------Lasso-----------#
   W <- matrix(0, p, ksteps)
   for (w in 1 : ksteps) {
     Xk <- create.gaussian(X = X, mu = mu, Sigma = Sigma, method = "sdp")
@@ -72,10 +66,6 @@ for(i in 1 : numRep){
     as <- which(W[ , 1] >= t)
     FDP[v, i] <- (sum(beta0[as] == 0))/max(length(as), 1)
     pwr[v, i] <- (sum(beta0[as] != 0))/s
-    #--AKO--#
-    as.AKO <- which(AKO(W = W, ksteps = ksteps, fdr = j, offset = 0, r = 0) == 1)
-    FDP.AKO[v, i] <- (sum(beta0[as.AKO] == 0))/max(length(as.AKO), 1)
-    pwr.AKO[v, i] <- (sum(beta0[as.AKO] != 0))/s
     #--modified AKO--#
     as.AKO.m <- which(AKO.m(W = W, ksteps = ksteps, fdr = j, offset = 0, r = 0) == 1)
     FDP.AKO.m[v, i] <- (sum(beta0[as.AKO.m] == 0)) / max(length(as.AKO.m), 1)
@@ -87,26 +77,19 @@ for(i in 1 : numRep){
 toc()
 #--repeation end--#
 
+
 # results:
-#-----FDR, Power, SA------#
+#-----FDR, Power-----#
 FDR <- apply(FDP, 1, mean)
 Pwr <- apply(pwr, 1, mean)
-SA <- - FDR + pwr
-
-FDR.AKO <- apply(FDP.AKO, 1, mean)
-Pwr.AKO <- apply(pwr.AKO, 1, mean)
-SA.AKO <- - FDR.AKO + pwr.AKO
 
 FDR.AKO.m <- apply(FDP.AKO.m, 1, mean)
 Pwr.AKO.m <- apply(pwr.AKO.m, 1, mean)
-SA.AKO.m <- - FDR.AKO.m + pwr.AKO.m
 
 
 # results display
 source("lib/myPlot.R")
-
-source("lib/plotlasso.R")
-# source("lib/plotlogistic.R")
+source("lib/plotlinear.R")
 
 
 

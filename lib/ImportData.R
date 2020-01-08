@@ -1,5 +1,6 @@
 #! R
 # Filename: ImportData.R
+
 ImportData <- function(filename, threshold = 0, replace.zero = TRUE) {
   # This function reads a raw file and returns relevant information from the 
   # data file depend on the need of the user. 

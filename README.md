@@ -15,12 +15,12 @@ The file `lib/stat.R` contains the functions `stat.ToDoFDRCon`, which is to comp
 The file `lib/myPlot.R` contains the function `myPlot` to display the relationships between target FDR and actual FDR and between target FDR and power.
 
 ## Simulations
-We provide the files `Simulation1.R` and `Simulation2.R` for comparing the FDR and power of `KO` with those of our pipelines `AKO` and `modified AKO`. `Simulation1.R` is designed for lasso and `Simulation2.R` is designed for l1 regularized logistic regression.
+We provide the files `Simulation1.R` and `Simulation2.R` for comparing the FDR and power of `KO` with those of our pipeline `modified AKO`. `Simulation1.R` is designed for the linear regression case and `Simulation2.R` is designed for the logistic regression case.
 
 ## Real Data Analysis
 The processed data in `RealData/ag-cleaned_L2.txt` is download from the website of the American Gut Project (http://americangut.org).
 
-The files `lib/DataUS012018.R`,`lib/ImportData.R` and `SelectIndLinCols.R` are used to import and transform the bacteria phyla and BMI data of United State from `RealData/ag-cleaned_L2.txt`. The data we used contains 8404 samples and 56 phyla.
+The files `lib/DataUS012018.R`,`lib/ImportData.R` and `SelectIndLinCols.R` are used to import and transform the bacteria phyla and BMI data of United State from `RealData/ag-cleaned_L2.txt`. 
 
 We provide the code `AGPAnalysis.R` to estimate the bacteria phyla that may have an influence on the obesity.
 

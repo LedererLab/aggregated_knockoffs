@@ -57,8 +57,6 @@ logRegData <- function(n, p, s, sigma, rho, snr = 5){
 }
 
 
-
-
 #---Generate the compositional data from the abundance data---#
 # 1. generete abundance data W from a log-normal dististrion
 # 2. transform abundance data W into compositional data Z through Z_ij = log(W_ij/sum(W_i))
@@ -72,14 +70,11 @@ logComposData <- function(n, p, s, sigma, rho, snr = 5, data.type = "linear"){
       CovMat[i, j] = rho^abs(i-j)
     }
   }
-  # mean = rnorm(p, 0, 10)
   mean = rep(0, p)
   ## 1 ##
   abundanceMat = exp(mvrnorm(n, mu = mean, Sigma = CovMat))
   ## 2 ##
   logComposData = scale(t(apply(abundanceMat, 1, function(x) log(x/sum(x)))))
-  # ComposData = t(apply(abundanceMat, 1, function(x) x/sum(x)))
-  # logComposData = scale(clr.FJ(ComposData))
   
   ## 3 ##
   noise = rnorm(n, 0, sigma)

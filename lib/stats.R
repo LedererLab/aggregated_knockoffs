@@ -75,6 +75,7 @@ logReg_est <- function(X, y){
   beta <- fit$beta
 }
 
+#--logReg_max_lambda--#
 logReg_max_lambda <- function(X, y, nlambda = 500) {
   if (!requireNamespace('glmnet', quietly = T))
     stop('glmnet is not installed', call. = F)
@@ -96,7 +97,7 @@ logReg_max_lambda <- function(X, y, nlambda = 500) {
   return(max_lambda)
 }
 
-#--statistic after pluging in knockoffs--#
+#--statistics after pluging in knockoffs--#
 stat.ToDoFDRCon <- function (X, Xk, y, stat.type = "max_lambda_lasso") {
   p = ncol(X)
   orig = 1 : p
@@ -130,3 +131,6 @@ stat.ToDoFDRCon <- function (X, Xk, y, stat.type = "max_lambda_lasso") {
   
   return(list(W = W, Z = Z))
 }
+
+
+

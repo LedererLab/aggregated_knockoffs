@@ -2,8 +2,7 @@
 # Filename: DataUS012018.R
 
 # Import Phylum level data before January 2018
-phylum.raw <- ImportData("RealData/ag-cleaned_L2.txt", threshold = 0, replace.zero = T, 
-                         all.data = F)
+phylum.raw <- ImportData("RealData/ag-cleaned_L2.txt", threshold = 0, replace.zero = T)
 phylum.raw <- as.matrix(phylum.raw)
 
 #--------------------------
