@@ -12,3 +12,12 @@ AGPAnalysis_genus.R
 RealData/ag-cleaned_L6.txt
 lib/DataUS012018_genus.R
 lib/ImportData_genus.R
+
+Results/linear1/FDR.pdf
+Results/linear1/Power.pdf
+Results/linear2/FDR.pdf
+Results/linear2/Power.pdf
+Results/logistic1/FDR.pdf
+Results/logistic1/Power.pdf
+Results/logistic2/FDR.pdf
+Results/logistic2/Power.pdf
