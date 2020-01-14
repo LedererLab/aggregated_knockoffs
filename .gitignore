@@ -8,10 +8,7 @@
 /Results/logComposData_ModifiedAKO
 /Results/logisticModifiedAKO
 
-AGPAnalysis_genus.R
-RealData/ag-cleaned_L6.txt
-lib/DataUS012018_genus.R
-lib/ImportData_genus.R
+
 
 Results/linear1/FDR.pdf
 Results/linear1/Power.pdf
@@ -25,3 +22,6 @@ Results/linear1/FDR_all.pdf
 Results/linear1/Power_all.pdf
 Results/logistic1/FDR_all.pdf
 Results/logistic1/Power_all.pdf
+
+Results/stability_analysis/
+lib/meanvarPlot.R
