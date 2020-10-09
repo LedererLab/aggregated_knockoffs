@@ -1,7 +1,7 @@
 #! R
-# Filename: Simulation1.R
+# Filename: Simulation2.R
 # File discription: This file is to display the results of aggregation knockoffs 
-#                   in the linear regression case. 
+#                   in the logistic regression case. 
 
 rm(list=ls())
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
@@ -17,23 +17,23 @@ library(knockoff)
 
 # generating data
 # initial parameters
-n <- 400 # sample size
-p <- 200 # number of variables
-s <- 20 # number of nonzero variables
+n <- 300 # sample size
+p <- 100 # number of variables
+s <- 30 # number of nonzero variables
 sigma <- 1 # standard deviation of noise
-rho <- 0.2 # correlation parameter in Sigma
+rho <- 0.5 # correlation parameter in Sigma
 snr <- 5 # signal to noise ratio
- 
+
 # number for Aggregation Knockoffs
 ksteps = 5
 # repeating number to get the average of FDR
-numRep = 100
+numRep = 50
 # fdr sequence
 fdr = seq(0.001, 1, length.out = 100)
 
 
-#---generate linear Gaussian data---#
-Data = linGauData(n, p, s, sigma, rho, snr)
+#---generate logistic regression data---#
+Data = logRegData(n, p, s, sigma, rho, snr)
 X = Data$X
 y = Data$y
 beta0 = Data$beta0
@@ -50,13 +50,13 @@ pwr <- FDP <- a # KO
 pwr.AKO.m <- FDP.AKO.m <- a # modified AKO
 
 
-#--repeation start--#
+#--repetition start--#
 tic()
 for(i in 1 : numRep){
   W <- matrix(0, p, ksteps)
   for (w in 1 : ksteps) {
     Xk <- create.gaussian(X = X, mu = mu, Sigma = Sigma, method = "sdp")
-    stat <- stat.ToDoFDRCon(X, Xk, y, stat.type = "max_lambda_lasso")
+    stat <- stat.ToDoFDRCon(X, Xk, y, stat.type = "max_lambda_logistic")
     W[ , w] <- stat$W
   }           
   v <- 1 # counter for length(fdr)
@@ -75,11 +75,11 @@ for(i in 1 : numRep){
   }
 }
 toc()
-#--repeation end--#
+#--repetition end--#
 
 
 # results:
-#-----FDR, Power-----#
+#-----FDR, Power------#
 FDR <- apply(FDP, 1, mean)
 Pwr <- apply(pwr, 1, mean)
 
@@ -89,7 +89,7 @@ Pwr.AKO.m <- apply(pwr.AKO.m, 1, mean)
 
 # results display
 source("lib/myPlot.R")
-source("lib/plotlinear.R")
+source("lib/plotlogistic.R")
 
 
 
