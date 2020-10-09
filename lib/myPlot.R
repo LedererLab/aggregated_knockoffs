@@ -45,6 +45,40 @@ myPlot <- function(x, y, main, ylab = c("Actual FDR", "Power", "selection accura
 }
 
 
+# add more FDR methods in comparison
+myPlot.m <- function(x, y, main, ylab = c("Actual FDR", "Power", "selection accuracy"), 
+                   xlab = "Target FDR", legend.x = NULL, legend.y = NULL,
+                   legendnames = NULL){
+  pch <- c(1, 19, 15, 16)
+  col <- c("darkorchid", "orange", "skyblue", "yellow")
+  plot(NULL, NULL, xlim = c(min(0, min(x)), max(1, max(x))), cex = 1, xlab = "", ylab = "", 
+       cex.axis = 1.2, type = "n", ylim = c(min(0, min(y)), max(1, max(y))), las = 1)
+  # points(x, y[ , 1], pch = pch[1], cex = 0.8, col = col[1])
+  # points(x, y[ , 2], pch = pch[2], cex = 0.8, col = col[2])
+  # points(x, y[ , 3], pch = pch[3], cex = 0.8, col = col[3])
+  # points(x, y[ , 4], pch = pch[4], cex = 0.8, col = col[4])
+  for(i in 1:ncol(y)){
+    points(x, y[ , i], pch = pch[i], cex = 0.8, col = col[i])
+  }
+  if(ylab == "Actual FDR"){
+    abline(a = 0, b = 1)
+  }
+  title(ylab = ylab, xlab = xlab, cex.lab = 1.5, line = 3)
+  title(main = main, cex.main = 2, line = 1, font.main = 2)
+  grid(col = "darkgray")
+  if(is.null(legend.x) & is.null(legend.y)){
+    if(ylab == "Actual FDR" | ylab == "selection accuracy"){
+      legend.x = - 0.05
+      legend.y = 1.05
+    }
+    if(ylab == "Power"){
+      legend.x = 0.45
+      legend.y = 0.3
+    }
+  }
+  legend(x = legend.x, y = legend.y, legend = legendnames, cex = 1.5, col = col,              
+         pch = pch, bty = "n", y.intersp = 0.7)
+}
 
 
 

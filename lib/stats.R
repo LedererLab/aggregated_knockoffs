@@ -76,12 +76,13 @@ logReg_est <- function(X, y){
 }
 
 #--logReg_max_lambda--#
-logReg_max_lambda <- function(X, y, nlambda = 500) {
+logReg_max_lambda <- function(X, y, nlambda = 500, standardize = T, intercept = T, ...) {
   if (!requireNamespace('glmnet', quietly = T))
     stop('glmnet is not installed', call. = F)
   
   n = nrow(X); p = ncol(X)
-  fit <- glmnet(X, y, family = "binomial", nlambda = nlambda)
+  fit <- glmnet(X, y, family = "binomial", nlambda = nlambda, 
+                standardize = standardize, intercept = intercept)
   betaM <- fit$beta
   lambda <- fit$lambda    # a decreasing sequence
   
