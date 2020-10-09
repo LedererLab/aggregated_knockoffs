@@ -9,6 +9,7 @@ source("lib/ImportData_genus.R")
 source("lib/SelectIndLinCols.R")
 source("lib/AggregatedKnockoffs.R")
 source("lib/stats.R")
+# source("lib/clr.R")
 
 # libraries
 library(pracma)
@@ -21,11 +22,15 @@ source("lib/DataUS012018_genus.R")
 # X and Y
 X.raw <- as.matrix(X.raw.US)
 Y <- Y.BMI.US
-X.new <- selindlinearcols(X.raw, tol = 5e-2)$full.new
-X.new <- t(apply(X.new, 1, function(x) x/sum(x)))
 
 # log-transformation
+X.new <- selindlinearcols(X.raw, tol = 5e-2)$full.new
+X.new <- t(apply(X.new, 1, function(x) x/sum(x)))
 X <- log(X.new)
+
+# # CLR
+# X <- clr.FJ(X.raw)
+# X <- selindlinearcols(X, tol = 5e-2)$full.new
 
 # Transform Y into 0, 1 for logistic regression
 Y[which(Y < 30)] <- 0

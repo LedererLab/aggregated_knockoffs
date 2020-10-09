@@ -9,6 +9,7 @@ source("lib/ImportData.R")
 source("lib/SelectIndLinCols.R")
 source("lib/AggregatedKnockoffs.R")
 source("lib/stats.R")
+# source("lib/clr.R")
 
 # libraries
 library(pracma)
@@ -18,14 +19,23 @@ library(matrixcalc)  # to use the function is.positive.definite
 # Import Phylum level data before January 2018
 source("lib/DataUS012018.R")
 
-# X and Y
-X.raw <- as.matrix(X.raw.US)[c(ext.indx.1, ext.indx.4), ]
-Y <- Y.BMI.US[c(ext.indx.1, ext.indx.2, ext.indx.4)]
-X.new <- selindlinearcols(X.raw)$full.new
-X.new <- t(apply(X.new, 1, function(x) x/sum(x)))
+# X and Y : please change the indices accordingly
+#           ext.indx.1: underweight 
+#           ext.indx.2: normal
+#           ext.indx.3: overweight
+#           ext.indx.4: obese
+X.raw <- as.matrix(X.raw.US)#[c(ext.indx.3, ext.indx.4), ]
+Y <- Y.BMI.US#[c(ext.indx.3, ext.indx.4)]
 
 # log-transformation
+X.new <- selindlinearcols(X.raw)$full.new
+X.new <- t(apply(X.new, 1, function(x) x/sum(x)))
 X <- log(X.new)
+
+# # CLR
+# X <- clr.FJ(X.raw)
+# X <- selindlinearcols(X)$full.new
+
 
 # Transform Y into 0, 1 for logistic regression
 Y[which(Y < 30)] <- 0
@@ -42,10 +52,10 @@ if(!is.positive.definite(Sigma)){
 
 # ksteps, fdr
 ksteps <- 5
-fdr <- 0.1
+fdr <- 0.15
 
 # number of repeations
-numRep <- 100
+numRep <- 20
 
 # results collectors
 as.KO <- matrix(0, p, numRep)   # KO: Barber & Candes (knockoff filter)

@@ -1,6 +1,6 @@
 # Code written by: Fang Xie and Johannes Lederer
 # select only independently linear columns of a matrix
-selindlinearcols <- function(mat, tol = 1e-4){
+selindlinearcols <- function(mat, tol = 1e-4){ #1e-4
   ColNames <- colnames(mat)
   tt <- qr(mat, tol = tol)
   full.new <- mat[, tt$pivot[seq_len(tt$rank)]]
