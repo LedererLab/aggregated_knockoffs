@@ -17,9 +17,9 @@ library(knockoff)
 
 # generating data
 # initial parameters
-n <- 300 # sample size
+n <- 200 # sample size
 p <- 100 # number of variables
-s <- 30 # number of nonzero variables
+s <- 20 # number of nonzero variables
 sigma <- 1 # standard deviation of noise
 rho <- 0.5 # correlation parameter in Sigma
 snr <- 5 # signal to noise ratio
@@ -27,7 +27,7 @@ snr <- 5 # signal to noise ratio
 # number for Aggregation Knockoffs
 ksteps = 5
 # repeating number to get the average of FDR
-numRep = 50
+numRep = 100
 # fdr sequence
 fdr = seq(0.001, 1, length.out = 100)
 
