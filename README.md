@@ -15,7 +15,7 @@ The file `lib/stat.R` contains the functions `stat.ToDoFDRCon`, which is to comp
 The file `lib/myPlot.R` contains the function `myPlot` to display the relationships between target FDR and actual FDR and between target FDR and power.
 
 ## Simulations
-We provide the files `Simulation1.R` and `Simulation2.R` for comparing the FDR and power of `KO` with those of our pipeline `modified AKO`. `Simulation1.R` is designed for the linear regression case and `Simulation2.R` is designed for the logistic regression case.
+We provide the files `Sim_linear_KO_AKO.R` and `Sim_logistic_KO_AKO.R` for comparing the FDR and power of `KO` with those of our pipeline `modified AKO`. `Sim_linear_KO_AKO.R` is designed for the linear regression case and `Sim_logistic_KO_AKO.R` is designed for the logistic regression case.
 
 ## Real Data Analysis
 The processed data in `RealData/ag-cleaned_L2.txt` and `RealData/ag-cleaned_L6.txt` are download from the website of the American Gut Project (http://americangut.org).
