@@ -56,9 +56,10 @@ for(i in 1 : numRep){
   W <- matrix(0, p, ksteps)
   for (w in 1 : ksteps) {
     Xk <- create.gaussian(X = X, mu = mu, Sigma = Sigma, method = "sdp")
-    stat <- stat.ToDoFDRCon(X, Xk, y, stat.type = "max_lambda_logistic")
+    stat <- stat.ToDoFDRCon(X, Xk, y, stat.type = "max_lambda_lasso")
     W[ , w] <- stat$W
-  }           
+  }   
+  
   v <- 1 # counter for length(fdr)
   for(j in fdr){
     #--KO--#
@@ -70,7 +71,7 @@ for(i in 1 : numRep){
     as.AKO.m <- which(AKO.m(W = W, ksteps = ksteps, fdr = j, offset = 0, r = 0) == 1)
     FDP.AKO.m[v, i] <- (sum(beta0[as.AKO.m] == 0)) / max(length(as.AKO.m), 1)
     pwr.AKO.m[v, i] <- (sum(beta0[as.AKO.m] != 0)) / s
-    
+
     v <- v + 1
   }
 }
@@ -89,8 +90,8 @@ Pwr.AKO.m <- apply(pwr.AKO.m, 1, mean)
 
 # results display
 source("lib/myPlot.R")
-source("lib/plotlogistic.R")
-
+# source("lib/plotlogistic.R")
+# open "lib/plotlogistic.R", and run the parts needed.
 
 
 

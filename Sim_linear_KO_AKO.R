@@ -90,7 +90,7 @@ Pwr.AKO.m <- apply(pwr.AKO.m, 1, mean)
 # results display
 source("lib/myPlot.R")
 # source("lib/plotlinear.R")
-
+# open "lib/plotlinear.R", and run the parts needed.
 
 
 

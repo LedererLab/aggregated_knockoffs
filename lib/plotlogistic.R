@@ -52,3 +52,24 @@ myPlot.m(x = fdr, y = Pwr2, main = "logistic", ylab = "Power", legendnames = leg
 dev.off()
 
 
+
+#--------------------------------------#
+#--plots of KO, modified AKO, and MKO--#
+FDR2 <- cbind(FDR, FDR.AKO.m, FDR.MKO)
+Pwr2 <- cbind(Pwr, Pwr.AKO.m, Pwr.MKO)
+legendnames.m = c("KO", "AKO", "MKO")
+#--define file names and legend names--#  
+filename5 = "Results/AISTATS/logistic/FDR1.pdf"  
+filename6 = "Results/AISTATS/logistic/Power1.pdf" 
+
+# display the relationship between FDR and TargetFDR
+pdf(file = filename5, width = 5, height = 5)
+myPlot.m(x = fdr, y = FDR2, main = "logistic", ylab = "Actual FDR", legendnames = legendnames.m)
+dev.off()
+
+# display the relationship between Power and TargetFDR 
+pdf(file = filename6, width = 5, height = 5)
+myPlot.m(x = fdr, y = Pwr2, main = "logistic", ylab = "Power", legendnames = legendnames.m,
+         legend.x = -0.05, legend.y = 1.05)
+dev.off()
+
