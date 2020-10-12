@@ -19,8 +19,8 @@ library(knockoff)
 
 # generating data
 # initial parameters
-n <- 300 # sample size
-p <- 100 # number of variables
+n <- 400 # sample size
+p <- 200 # number of variables
 s <- 30 # number of nonzero variables
 sigma <- 1 # standard deviation of noise
 rho <- 0.5 # correlation parameter in Sigma
@@ -29,7 +29,7 @@ snr <- 5 # signal to noise ratio
 # number for Aggregation Knockoffs
 ksteps = 5
 # repeating number to get the average of FDR
-numRep = 10
+numRep = 100
 # fdr sequence
 fdr = seq(0.001, 1, length.out = 100)
 
@@ -83,7 +83,7 @@ for(i in 1 : numRep){
     FDP.AKO.m[v, i] <- (sum(beta0[as.AKO.m] == 0)) / max(length(as.AKO.m), 1)
     pwr.AKO.m[v, i] <- (sum(beta0[as.AKO.m] != 0)) / s
     #--MKO--#
-    as.MKO <- which(MKO(W = W, fdr = j, offset = 0) == 1)
+    as.MKO <- which(MKO(W = W.MKO, fdr = j, offset = 0) == 1)
     FDP.MKO[v, i] <- (sum(beta0[as.MKO] == 0)) / max(length(as.MKO), 1)
     pwr.MKO[v, i] <- (sum(beta0[as.MKO] != 0)) / s
     
